@@ -23,16 +23,29 @@ public class Card
     
     public enum Color{
         RED, BLUE, GREEN, YELLOW, WILD;
+        
+        //getter to access color values before object is created
+        //cannot have a setter since enums are immutable/final
+        private static Color[] colors = Color.values();
+        public static Color getColor(int i){
+            return Color.colors[i];
+        }
     }
     
     public enum Value{
         ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, DRAWTWO, SKIP, REVERSE, WILD, WILDFOUR;
+        
+        //getter to access card number values before object is created
+        private static Value[] values = Value.values();
+        public static Value getValue(int i){
+            return Value.values[i];
+        }
     }
     
     private Value value;
     private Color color;
     
-    public Card(Value value, Color color){
+    public Card(Color color, Value value){
         this.value = value;
         this.color = color;
     }
