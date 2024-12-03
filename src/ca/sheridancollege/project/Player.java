@@ -5,13 +5,18 @@
  */
 package ca.sheridancollege.project;
 
+import java.util.ArrayList;
+
 /**
  * A class that models each Player in the game. Players have an identifier, which should be unique.
  * @author dancye, 2018
+ * @modifier sarmijor, 2024
  */
 public abstract class Player 
 {
-    private String playerID; //the unique ID for this player
+    public String playerID; //the unique ID for this player
+    private static final int maxPlayers = 4; //must create object instance if wanted to access
+    private ArrayList<String> activePlayers;
     
     /**
      * A constructor that allows you to set the player's unique ID
@@ -19,7 +24,7 @@ public abstract class Player
      */
     public Player(String name)
     {
-        playerID= name;
+        playerID = name;
     }
     
     /**
@@ -36,7 +41,12 @@ public abstract class Player
      */
     public void setPlayerID(String givenID) 
     {
-        playerID = givenID;
+        if(activePlayers.contains(givenID) || activePlayers.size() > maxPlayers){
+            throw new IllegalArgumentException(givenID + " is already used ");
+        }else{
+            playerID = givenID;
+            activePlayers.add(givenID);
+        }
     }
     
     /**
