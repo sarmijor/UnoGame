@@ -14,20 +14,20 @@ import java.util.Scanner;
 public class UnoPlayer extends Player {
 
     private Scanner input;
-    private boolean saidUno;
 
     public UnoPlayer(String name) {
         super(name);
         input = new Scanner(System.in);
-        saidUno = false; // False until player says "uno" and becomes true
     }
 
     @Override
     public void play(Game game) {
+        // Tells player what card is in discard pile
         Card topCard = game.getTopCard();
         System.out.println(getPlayerID() + "'s turn. \nTop card: " + topCard);
         System.out.println("Your hand:");
         
+        // Displays the cards in hand of player
         ArrayList<Card> hand = getHand();
         for (int i = 0; i < hand.size(); i++) {
             System.out.println((i + 1) + ". " + hand.get(i));
@@ -35,23 +35,11 @@ public class UnoPlayer extends Player {
 
         boolean cardPlayed = false;
         while (!cardPlayed) {
-            // Checking if the player says "UNO"
-            if (hand.size() == 2 && !saidUno) {
-                System.out.println("You have 2 cards left. Type 'uno' before playing your card.");
-                String unoInput = input.nextLine();
-                if (unoInput.equalsIgnoreCase("uno")) {
-                    saidUno = true;
-                } else {
-                    System.out.println("You forgot to say 'UNO'! You must now draw 2 cards.");
-                    hand.add(game.drawCard());
-                    hand.add(game.drawCard());
-                    saidUno = false; 
-                    break; 
-                } 
-            }
+            // Beginning of players turn
             System.out.println("Choose a card to play by entering a number from hand (1-x) or type 'draw' to draw a card:");
             String choice = input.nextLine();
-
+            
+            // Draw card if not playable or plays card if draws a playable card
             if (choice.equalsIgnoreCase("draw")) {
                 Card drawnCard = game.drawCard();
                 addCard(drawnCard);
@@ -80,9 +68,9 @@ public class UnoPlayer extends Player {
         }
 
         if (getHand().size() == 1) {
-            System.out.println(getPlayerID() + " says UNO!");
+            System.out.println(getPlayerID() + " said UNO!");
         } else if (getHand().isEmpty()) {
-            System.out.println(getPlayerID() + " wins the game!");
+            System.out.println(getPlayerID() + " won the game!");
             game.endGame();
         }
     }
