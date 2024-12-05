@@ -3,8 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ca.sheridancollege.project;
-//import ca.sheridancollege.project.Card.Color;
-//import ca.sheridancollege.project.Card.Value;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
@@ -13,10 +11,12 @@ import javax.swing.ImageIcon;
 
 
 /**
- *
- * @author jordansarmiento
+ * This was from a video from Code Clique on 20190814 to Youtube here:
+ * https://www.youtube.com/watch?v=_N55grzfD9E&list=PLu_zq6omCvuQ_ZoKnE8-CE2nF113p9pxd&index=2
+ * @modified sarmijor, 2024
  */
 public class UnoDeck {
+    //fixed array since there will always be 108 cards in a deck
     private Card[] cards;
     private int deckCards;
     
@@ -98,13 +98,6 @@ public class UnoDeck {
             throw new NoSuchElementException("There are no more cards to draw");
         }
         return cards[--deckCards]; //draws a card and decrements deck by 1
-    }
-    
-    public ImageIcon drawCardImage() throws NoSuchElementException{
-        if(isEmpty()){
-            throw new NoSuchElementException("No cards left in deck to draw");
-        }
-        return new ImageIcon(cards[--deckCards].toString() + ",png");
     }
     
     //Declares an error exception when an illegal argument is passed to the method
